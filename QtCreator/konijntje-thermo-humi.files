@@ -1,0 +1,8 @@
+../firmware/konijntje-thermo-humi/konijntje-thermo-humi.ino
+../firmware/konijntje-thermo-humi/arduinoi2c.cpp
+../firmware/konijntje-thermo-humi/arduinoi2c.h
+../firmware/konijntje-thermo-humi/HTU21D.cpp
+../firmware/konijntje-thermo-humi/HTU21D.h
+../firmware/konijntje-thermo-humi/I2cInterface.h
+../firmware/konijntje-thermo-humi/stm32i2c.h
+../firmware/konijntje-thermo-humi/stm32i2c.cpp
