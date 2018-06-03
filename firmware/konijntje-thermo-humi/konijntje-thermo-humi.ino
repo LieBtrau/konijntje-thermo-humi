@@ -20,13 +20,16 @@ void setup()
 
 void loop()
 {
-    float fTemp;
+    float fTemp, fHumi;
+    bool bHeater=false;
+    char s[80];
     if(millis()>ulTimer+1000)
     {
         ulTimer=millis();
-        if(tSensor.readTemperature(fTemp))
+        if(tSensor.readTemperature(fTemp) && tSensor.readHumidity(fHumi, bHeater))
         {
-            Serial.println(fTemp);
+            sprintf(s, "Temperature : %2.1f°C \tHumidity: %2.2f%%", fTemp, fHumi);
+            Serial.println(s);
         }
     }
 }
