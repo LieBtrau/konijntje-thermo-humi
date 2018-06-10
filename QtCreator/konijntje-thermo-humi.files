@@ -6,3 +6,5 @@
 ../firmware/konijntje-thermo-humi/I2cInterface.h
 ../firmware/konijntje-thermo-humi/stm32i2c.h
 ../firmware/konijntje-thermo-humi/stm32i2c.cpp
+../firmware/konijntje-thermo-humi/attinyi2c.h
+../firmware/konijntje-thermo-humi/attinyi2c.cpp

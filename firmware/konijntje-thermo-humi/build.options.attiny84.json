@@ -1,0 +1,10 @@
+{
+  "builtInLibrariesFolders": "/home/ctack/Programs/arduino-1.8.5/libraries",
+  "customBuildProperties": "build.warn_data_percentage=75",
+  "fqbn": "ATTinyCore:avr:attinyx4:LTO=disable,chip=84,clock=8internal,eesave=aenable,bod=2v7,pinmapping=anew",
+  "hardwareFolders": "/home/ctack/Programs/arduino-1.8.5/hardware,/home/ctack/.arduino15/packages",
+  "otherLibrariesFolders": "/home/ctack/Arduino/libraries",
+  "runtime.ide.version": "10805",
+  "sketchLocation": "/home/ctack/git/konijntje-thermo-humi/firmware/SoftwareSerialExample/SoftwareSerialExample.ino",
+  "toolsFolders": "/home/ctack/Programs/arduino-1.8.5/tools-builder,/home/ctack/Programs/arduino-1.8.5/hardware/tools/avr,/home/ctack/.arduino15/packages"
+}
