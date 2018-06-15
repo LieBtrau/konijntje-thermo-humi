@@ -48,7 +48,7 @@ bool HTU21D::setHeater(bool bHeaterOn){
     return writeCmd(WRITE_USER_REG, &userRegister,1);
 }
 
-bool HTU21D::readHumidity(float& humidity, bool& bHeaterOn)
+bool HTU21D::readHumidity(byte &humidity, bool& bHeaterOn)
 {
     byte data[3];
     humidity=0;
@@ -62,7 +62,7 @@ bool HTU21D::readHumidity(float& humidity, bool& bHeaterOn)
     {
         return false;
     }
-    unsigned int rawHumidity = ((unsigned int) data[0] << 8) | (unsigned int) data[1];
+    long rawHumidity = (data[0] << 8) |  data[1];
     sensorStatus = rawHumidity & 0x0003; //Grab only the right two bits
     if(sensorStatus!=2)
     {
@@ -70,18 +70,17 @@ bool HTU21D::readHumidity(float& humidity, bool& bHeaterOn)
     }
     rawHumidity &= 0xFFFC; //Zero out the status bits but keep them in place
 
-    //Given the raw humidity data, calculate the actual relative humidity
-    float tempRH = rawHumidity / (float)65536; //2^16 = 65536
-    humidity = -6 + (125 * tempRH);
+    rawHumidity = ((rawHumidity * 125)>>16)-6;
+    if(rawHumidity<0)
+    {
+        rawHumidity=0;
+    }
+    if(rawHumidity>100)
+    {
+        rawHumidity=100;
+    }
+    humidity=lowByte(rawHumidity);
 
-    if(humidity<0)
-    {
-        humidity=0;
-    }
-    if(humidity>100)
-    {
-        humidity=100;
-    }
     //Possible condensation on sensor, enable internal heater to drive condensation off
     //While heater is on, measurement data is invalid
 //    bHeaterOn= humidity==0 || humidity>=80;
@@ -92,8 +91,8 @@ bool HTU21D::readHumidity(float& humidity, bool& bHeaterOn)
 
 //Read the temperature
 /*******************************************************************************************/
-//Calc temperature and return it to the user
-bool HTU21D::readTemperature(float& temp)
+//Calc temperature and return it to the user (in c°C, i.e. 123 = 1.23°C)
+bool HTU21D::readTemperature(int& temp)
 {
     byte data[3];
     temp=0;
@@ -106,14 +105,10 @@ bool HTU21D::readTemperature(float& temp)
     {
         return false;
     }
-    unsigned int rawTemperature = ((unsigned int) data[0] << 8) | (unsigned int) data[1];
-
-    //sensorStatus = rawTemperature & 0x0003; //Grab only the right two bits
-    rawTemperature &= 0xFFFC; //Zero out the status bits but keep them in place
-
-    //Given the raw temperature data, calculate the actual temperature
-    float tempTemperature = rawTemperature / (float)65536; //2^16 = 65536
-    temp = -46.85 + (175.72 * tempTemperature);
+    //    //Given the raw temperature data, calculate the actual temperature
+    long rawTemperature = (data[0] << 8) | data[1];
+    rawTemperature = (17572 * rawTemperature)/65536 - 4685;
+    temp = rawTemperature;
     return true;
 }
 

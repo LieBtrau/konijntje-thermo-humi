@@ -27,8 +27,8 @@ public:
         RH_11b_TEMP_11b
     } RESOLUTION;
     HTU21D(I2cInterface* pI2C);
-    bool readHumidity(float &humidity, bool &bHeaterOn);
-    bool readTemperature(float &temp);
+    bool readHumidity(byte &humidity, bool &bHeaterOn);
+    bool readTemperature(int &temp);
     bool init(RESOLUTION res);
     bool readSerialNumber(byte* sn);
     bool setHeater(bool bHeaterOn);
