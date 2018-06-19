@@ -1,0 +1,3 @@
+[submodule "Chaplex"]
+	path = Chaplex
+	url = https://github.com/LieBtrau/Chaplex.git
