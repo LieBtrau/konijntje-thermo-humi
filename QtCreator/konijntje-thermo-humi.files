@@ -8,3 +8,4 @@
 ../firmware/konijntje-thermo-humi/stm32i2c.cpp
 ../../Chaplex/Chaplex.cpp
 ../../Chaplex/Chaplex.h
+../firmware/functionalTest/functionalTest.ino
